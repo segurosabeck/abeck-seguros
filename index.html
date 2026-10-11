@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>ABECK | Asesoría Financiera y Seguros · Abraham López Encinas</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    :root {
+      --brand-blue: #0056B3;
+      --brand-blue-dark: #003673;
+      --brand-blue-deep: #00224d;
+      --brand-blue-soft: #f0f6fd;
+      --brand-blue-mid: #e1edfc;
+      --brand-orange: #F57C00;
+      --brand-orange-light: #FF9800;
+      --brand-orange-soft: #fff5e8;
+      
+      --bg-light: #f8fafc;
+      --card-bg: rgba(255, 255, 255, 0.90);
+      --card-bg-hover: rgba(255, 255, 255, 0.98);
+      
+      --text-main: #0c1829;
+      --text-muted: #415169;
+      --border-subtle: rgba(0, 86, 179, 0.14);
+      --border-focus: rgba(245, 124, 0, 0.45);
+      
+      --orange-gradient: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+      --blue-gradient: linear-gradient(135deg, #0d70dc 0%, #0056B3 100%);
+      --surface-gradient: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(240, 246, 253, 0.90));
+      
+      --shadow-sm: 0 4px 15px rgba(0, 40, 90, 0.04);
+      --shadow-md: 0 12px 30px rgba(0, 40, 90, 0.08);
+      --shadow-lg: 0 22px 50px rgba(0, 40, 90, 0.12);
+      
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-light);
+      background-image: 
+        linear-gradient(rgba(248, 250, 252, 0.70), rgba(248, 250, 252, 0.78)), 
+        url('fondo.png');
+      background-repeat: repeat;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: var(--text-main);
+      overflow-x: hidden;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .glow-orb {
+      position: fixed;
+      width: 48vw;
+      height: 48vw;
+      min-width: 320px;
+      min-height: 320px;
+      border-radius: 50%;
+      filter: blur(140px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.16;
+      animation: floatGlow 18s ease-in-out infinite alternate;
+    }
+    .glow-1 {
+      top: -10vw;
+      left: -8vw;
+      background: radial-gradient(circle, var(--brand-orange), transparent 70%);
+    }
+    .glow-2 {
+      bottom: -10vw;
+      right: -8vw;
+      background: radial-gradient(circle, var(--brand-blue), transparent 70%);
+      animation-delay: -9s;
+    }
+    @keyframes floatGlow {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, 30px) scale(1.08); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(35px) scale(0.98);
+      transition: opacity 0.85s var(--ease-out), transform 0.85s var(--ease-out);
+      will-change: opacity, transform;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .delay-1 { transition-delay: 0.12s; }
+    .delay-2 { transition-delay: 0.24s; }
+    .delay-3 { transition-delay: 0.36s; }
+    .delay-4 { transition-delay: 0.48s; }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 0.9rem 1.6rem;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .brand-link {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      transition: transform 0.3s var(--ease-out);
+    }
+    .brand-link:hover {
+      transform: scale(1.02);
+    }
+    .logo-img-header {
+      height: 46px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 600;
+      font-size: 0.94rem;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--brand-orange);
+      transition: width 0.3s var(--ease-out);
+    }
+    .nav-links a:hover {
+      color: var(--brand-orange);
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.85rem 1.85rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.35s var(--ease-out);
+      border: none;
+      white-space: nowrap;
+    }
+    .btn-call {
+      background: var(--orange-gradient);
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(245, 124, 0, 0.35);
+    }
+    .btn-call:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(245, 124, 0, 0.5);
+    }
+    .btn-contact {
+      background: var(--blue-gradient);
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(0, 86, 179, 0.3);
+    }
+    .btn-contact:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(0, 86, 179, 0.45);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero {
+      min-height: 95svh;
+      display: flex;
+      align-items: center;
+      padding-top: 6.8rem;
+      padding-bottom: 4.5rem;
+      position: relative;
+    }
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero-logo-center {
+      margin-bottom: 1.8rem;
+      display: flex;
+      justify-content: center;
+    }
+    .hero-logo-img {
+      max-width: 330px;
+      width: 82%;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 24px rgba(0, 86, 179, 0.16));
+      animation: pulseLogo 6s ease-in-out infinite;
+    }
+    @keyframes pulseLogo {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.025); }
+    }
+
+    .gnp-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.5rem 1.45rem;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: 9999px;
+      margin-bottom: 1.6rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .gnp-badge .gnp-txt-orange {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      color: var(--brand-orange);
+      font-size: 1.05rem;
+      letter-spacing: -0.3px;
+    }
+    .gnp-badge .gnp-logo-symbol {
+      width: 22px;
+      height: 22px;
+      display: inline-flex;
+    }
+    .gnp-badge .gnp-txt-blue {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      color: var(--brand-blue-deep);
+      font-size: 1.15rem;
+      letter-spacing: 0.5px;
+    }
+
+    .hero h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.15rem, 4.8vw + 0.8rem, 3.85rem);
+      font-weight: 800;
+      line-height: 1.18;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.025em;
+      color: var(--text-main);
+    }
+    .text-orange {
+      color: var(--brand-orange);
+      position: relative;
+      display: inline-block;
+    }
+    .hero p.hero-subtitle {
+      font-size: clamp(1.05rem, 1.2vw + 0.5rem, 1.3rem);
+      color: var(--text-muted);
+      max-width: 760px;
+      margin: 0 auto 2.5rem;
+      font-weight: 500;
+      line-height: 1.7;
+    }
+    .hero-cta {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+      margin-top: 3.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--brand-blue);
+      line-height: 1.1;
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 0.25rem;
+    }
+
+    .section {
+      padding: 5.5rem 0;
+      position: relative;
+    }
+    .section-title-wrap {
+      text-align: center;
+      margin-bottom: 3.6rem;
+    }
+    .section-subtitle {
+      color: var(--brand-orange);
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(1.9rem, 3.4vw, 2.7rem);
+      font-weight: 800;
+      color: var(--brand-blue-deep);
+      line-height: 1.25;
+    }
+    .section-desc {
+      max-width: 720px;
+      margin: 0.8rem auto 0;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(295px, 1fr));
+      gap: 1.8rem;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.6rem;
+    }
+
+    .card-luxury {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 2.4rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s var(--ease-out);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+    .card-luxury::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--orange-gradient);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s var(--ease-out);
+    }
+    .card-luxury:hover {
+      transform: translateY(-8px);
+      background: var(--card-bg-hover);
+      border-color: var(--border-focus);
+      box-shadow: var(--shadow-lg);
+    }
+    .card-luxury:hover::before {
+      transform: scaleX(1);
+    }
+    .card-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: var(--brand-orange-soft);
+      border: 1.5px solid rgba(245, 124, 0, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      color: var(--brand-orange);
+      margin-bottom: 1.6rem;
+      transition: all 0.4s var(--ease-out);
+    }
+    .card-luxury:hover .card-icon {
+      transform: scale(1.1) rotate(5deg);
+      background: var(--orange-gradient);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 8px 20px rgba(245, 124, 0, 0.35);
+    }
+    .card-luxury h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.35rem;
+      margin-bottom: 0.8rem;
+      font-weight: 800;
+      color: var(--brand-blue-deep);
+    }
+    .card-luxury p {
+      color: var(--text-muted);
+      font-size: 0.96rem;
+      line-height: 1.65;
+    }
+
+    .interactive-stage-section {
+      background: var(--surface-gradient);
+      border: 2px solid var(--border-subtle);
+      border-radius: 28px;
+      padding: 3.5rem 2.2rem;
+      box-shadow: var(--shadow-md);
+      backdrop-filter: blur(12px);
+    }
+    .stage-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .stage-tab-btn {
+      background: rgba(255, 255, 255, 0.8);
+      border: 1.5px solid var(--border-subtle);
+      padding: 0.75rem 1.6rem;
+      border-radius: 50px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.3s var(--ease-out);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .stage-tab-btn:hover {
+      border-color: var(--brand-orange);
+      color: var(--brand-orange);
+    }
+    .stage-tab-btn.active {
+      background: var(--blue-gradient);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 6px 18px rgba(0, 86, 179, 0.3);
+    }
+    .stage-content-card {
+      display: none;
+      animation: fadeInStage 0.5s var(--ease-out) forwards;
+    }
+    .stage-content-card.active {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.2rem;
+      align-items: center;
+    }
+    @keyframes fadeInStage {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .stage-text h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--brand-blue-deep);
+      margin-bottom: 1rem;
+    }
+    .stage-text p {
+      color: var(--text-muted);
+      font-size: 1.02rem;
+      margin-bottom: 1.5rem;
+    }
+    .stage-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .stage-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 600;
+      font-size: 0.98rem;
+      color: var(--text-main);
+    }
+    .stage-list li i {
+      color: var(--brand-orange);
+      font-size: 1.1rem;
+    }
+    .stage-box-visual {
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      border-radius: 22px;
+      padding: 2.2rem;
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+    }
+    .stage-box-visual .visual-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--brand-blue-soft);
+      color: var(--brand-blue);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+    }
+    .stage-box-visual h4 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--brand-blue-deep);
+      margin-bottom: 0.5rem;
+    }
+    .stage-box-visual p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      padding: 2.2rem 1.8rem;
+      border-radius: 22px;
+      transition: all 0.4s var(--ease-out);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(10px);
+      position: relative;
+    }
+    .feature-card:hover {
+      background: var(--card-bg-hover);
+      border-color: var(--brand-blue);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+    }
+    .feature-card i {
+      font-size: 2.2rem;
+      color: var(--brand-orange);
+      margin-bottom: 1.2rem;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    .feature-card:hover i {
+      transform: scale(1.15);
+    }
+    .feature-card h4 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 0.6rem;
+      font-family: 'Outfit', sans-serif;
+      color: var(--brand-blue-deep);
+    }
+    .feature-card p {
+      font-size: 0.94rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .gnp-banner {
+      background: var(--surface-gradient);
+      border: 2px solid var(--border-subtle);
+      border-radius: 28px;
+      padding: 3.8rem 2.4rem;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+    .gnp-banner-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 2.8rem;
+    }
+    .gnp-logo-full {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 1.2rem;
+    }
+    .gnp-logo-full .tag-agente {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      color: var(--brand-orange);
+      line-height: 1;
+    }
+    .gnp-logo-full .tag-gnp {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      border-left: 2px solid rgba(11, 34, 101, 0.25);
+      padding-left: 0.95rem;
+    }
+    .tag-gnp-main {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+      color: var(--brand-blue-deep);
+      line-height: 0.9;
+    }
+    .tag-gnp-sub {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 5px;
+      font-weight: 700;
+      color: var(--brand-blue-deep);
+      margin-top: 0.35rem;
+    }
+    .gnp-banner p.gnp-intro {
+      max-width: 800px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 1.08rem;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .gnp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.8rem;
+    }
+    .gnp-item {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.35s var(--ease-out);
+    }
+    .gnp-item:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--brand-blue);
+    }
+    .gnp-item i {
+      font-size: 2rem;
+      color: var(--brand-orange);
+      margin-bottom: 1rem;
+    }
+    .gnp-item h4 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--brand-blue-deep);
+      margin-bottom: 0.5rem;
+    }
+    .gnp-item p {
+      font-size: 0.94rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .process-timeline {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.8rem;
+    }
+    .process-step {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 22px;
+      padding: 2.2rem 1.8rem;
+      position: relative;
+      transition: all 0.4s var(--ease-out);
+      backdrop-filter: blur(10px);
+    }
+    .process-step:hover {
+      transform: translateY(-6px);
+      border-color: var(--brand-orange);
+      box-shadow: var(--shadow-md);
+    }
+    .step-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--brand-orange-soft);
+      color: var(--brand-orange);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.4rem;
+      border: 1.5px solid rgba(245, 124, 0, 0.25);
+    }
+    .process-step h4 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--brand-blue-deep);
+      margin-bottom: 0.6rem;
+    }
+    .process-step p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .mission-vision-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    .mv-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 26px;
+      padding: 2.8rem 2.4rem;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(10px);
+      transition: all 0.35s var(--ease-out);
+    }
+    .mv-box:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .mv-box h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.95rem;
+      font-weight: 800;
+      color: var(--brand-blue-deep);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .mv-box p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .contact-banner {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, #edf4fd 100%);
+      border: 2px solid var(--brand-blue);
+      border-radius: 30px;
+      padding: 3.8rem 2.2rem;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+    .contact-banner h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2rem, 3.8vw, 2.7rem);
+      margin-bottom: 0.4rem;
+      font-weight: 900;
+      color: var(--brand-blue-deep);
+    }
+    .agent-name {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--brand-orange);
+      margin-bottom: 1.4rem;
+    }
+    
+    .email-btn-wrapper {
+      margin-bottom: 2.2rem;
+    }
+    .email-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: #ffffff;
+      border: 1.5px solid var(--border-subtle);
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--brand-blue);
+      text-decoration: none;
+      transition: all 0.35s var(--ease-out);
+      box-shadow: var(--shadow-sm);
+    }
+    .email-action-btn i {
+      color: var(--brand-orange);
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+    .email-action-btn:hover {
+      border-color: var(--brand-orange);
+      color: var(--brand-orange);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+    .email-action-btn:hover i {
+      transform: scale(1.15) rotate(-5deg);
+    }
+
+    .contact-actions-row {
+      display: flex;
+      justify-content: center;
+      gap: 1.3rem;
+      flex-wrap: wrap;
+    }
+
+    .mobile-bar {
+      position: fixed;
+      bottom: 1rem;
+      left: 1rem;
+      right: 1rem;
+      z-index: 999;
+      display: none;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 0.75rem;
+      border-radius: 50px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 12px 35px rgba(0, 40, 90, 0.18);
+      gap: 0.75rem;
+    }
+    .mobile-bar a {
+      flex: 1;
+    }
+
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 2.5rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      background: rgba(255, 255, 255, 0.88);
+      margin-top: 3.5rem;
+    }
+
+    @media (max-width: 860px) {
+      .nav-links {
+        display: none;
+      }
+      .mobile-bar {
+        display: flex;
+      }
+      .hero {
+        padding-top: 5.6rem;
+        padding-bottom: 3.5rem;
+      }
+      .section {
+        padding: 3.8rem 0;
+      }
+      body {
+        padding-bottom: 5rem;
+      }
+      .logo-img-header {
+        height: 38px;
+      }
+      .stage-content-card.active {
+        grid-template-columns: 1fr;
+        gap: 1.8rem;
+      }
+      .gnp-logo-full {
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      .gnp-logo-full .tag-gnp {
+        border-left: none;
+        padding-left: 0;
+        align-items: center;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .logo-img-header {
+        height: 32px;
+      }
+      .hero h1 {
+        font-size: 1.7rem;
+      }
+      .btn {
+        padding: 0.7rem 1.1rem;
+        font-size: 0.9rem;
+      }
+      .email-action-btn {
+        font-size: 0.95rem;
+        padding: 0.75rem 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-orb glow-1"></div>
+  <div class="glow-orb glow-2"></div>
+
+  <header>
+    <a href="#" class="brand-link" aria-label="ABECK Inicio">
+      <img src="logo.png" alt="ABECK Asesoría Financiera y Seguros" class="logo-img-header" />
+    </a>
+    <nav class="nav-links">
+      <a href="#etapas">Diagnóstico</a>
+      <a href="#pilares">Estrategias</a>
+      <a href="#vida">Seguro de Vida</a>
+      <a href="#respaldo">GNP Seguros</a>
+      <a href="#metodo">Metodología</a>
+      <a href="#mision-vision">Misión y Visión</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-content">
+      
+      <div class="hero-logo-center reveal">
+        <img src="logo.png" alt="ABECK Logo" class="hero-logo-img" />
+      </div>
+
+      <div class="gnp-badge reveal delay-1">
+        <span class="gnp-txt-orange">Agente</span>
+        <svg class="gnp-logo-symbol" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="14" fill="#F57C00"/>
+          <path d="M50 8 C43 8 38 13 38 20 L38 32 C42 30 46 29 50 29 C54 29 58 30 62 32 L62 20 C62 13 57 8 50 8 Z" fill="#F57C00"/>
+          <path d="M50 92 C57 92 62 87 62 80 L62 68 C58 70 54 71 50 71 C46 71 42 70 38 68 L38 80 C38 87 43 92 50 92 Z" fill="#F57C00"/>
+          <path d="M8 50 C8 57 13 62 20 62 L32 62 C30 58 29 54 29 50 C29 46 30 42 32 38 L20 38 C13 38 8 43 8 50 Z" fill="#F57C00"/>
+          <path d="M92 50 C92 43 87 38 80 38 L68 38 C70 42 71 46 71 50 C71 54 70 58 68 62 L80 62 C87 62 92 57 92 50 Z" fill="#F57C00"/>
+        </svg>
+        <span class="gnp-txt-blue">GNP</span>
+      </div>
+
+      <h1 class="reveal delay-2">
+        Te ayudo a <span class="text-orange">proteger tu patrimonio</span>, construir tu retiro y pagar menos impuestos con estrategias inteligentes.
+      </h1>
+
+      <p class="hero-subtitle reveal delay-3">
+        Tú te enfocas en vivir tus proyectos, nosotros te ayudamos a protegerlos. Anticiparte hoy no es un gasto, es la certeza financiera de tu futuro.
+      </p>
+
+      <div class="hero-cta reveal delay-4">
+        <a href="tel:6441292729" class="btn btn-call">Llamar</a>
+        <a href="#contacto" class="btn btn-contact">Contacto</a>
+      </div>
+
+      <div class="hero-stats reveal delay-4">
+        <div class="stat-item">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Personalizado</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">+120 Años</div>
+          <div class="stat-label">Respaldo GNP</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">0 Costo</div>
+          <div class="stat-label">Sesión Diagnóstica</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section" id="etapas">
+    <div class="container">
+      <div class="section-title-wrap reveal">
+        <div class="section-subtitle">¿En qué etapa te encuentras?</div>
+        <h2 class="section-title">El Momento Ideal para Blindar tu Futuro</h2>
+        <p class="section-desc">
+          Las necesidades financieras cambian con el tiempo. Descubre cuál es el enfoque estratégico diseñado exactamente para tu momento de vida actual.
+        </p>
+      </div>
+
+      <div class="interactive-stage-section reveal delay-1">
+        
+        <div class="stage-tabs">
+          <button class="stage-tab-btn active" data-tab="tab-joven">
+            <i class="fa-solid fa-bolt"></i> Menores de 30 Años
+          </button>
+          <button class="stage-tab-btn" data-tab="tab-familia">
+            <i class="fa-solid fa-people-roof"></i> Familias y Profesionistas
+          </button>
+          <button class="stage-tab-btn" data-tab="tab-retiro">
+            <i class="fa-solid fa-hourglass-half"></i> Consolidación y Retiro
+          </button>
+          <button class="stage-tab-btn" data-tab="tab-negocios">
+            <i class="fa-solid fa-building-user"></i> Empresarios y PyMEs
+          </button>
+        </div>
+
+        <div class="stage-content-card active" id="tab-joven">
+          <div class="stage-text">
+            <h3>El efecto multiplicador del tiempo</h3>
+            <p>
+              Iniciar antes de los 30 años permite aprovechar primas mucho más accesibles y potenciar el interés compuesto. Es el momento perfecto para crear disciplina de ahorro sin sacrificar tu estilo de vida.
+            </p>
+            <ul class="stage-list">
+              <li><i class="fa-solid fa-check"></i> Primas de seguros a su costo más bajo por salud y juventud.</li>
+              <li><i class="fa-solid fa-check"></i> Flexibilidad para capitalizar proyectos: maestría, casa propia o negocio.</li>
+              <li><i class="fa-solid fa-check"></i> Comienzo anticipado de deducciones fiscales anuales.</li>
+            </ul>
+          </div>
+          <div class="stage-box-visual">
+            <div class="visual-icon"><i class="fa-solid fa-rocket"></i></div>
+            <h4>Mayor Rendimiento</h4>
+            <p>El costo de postergar 5 años puede representar hasta el 40% de menor rendimiento acumulado en tu retiro.</p>
+          </div>
+        </div>
+
+        <div class="stage-content-card" id="tab-familia">
+          <div class="stage-text">
+            <h3>Blindaje para quienes más amas</h3>
+            <p>
+              Cuando tu familia depende de tu capacidad para generar ingresos, la protección médica y de vida deja de ser opcional: es la garantía de que su nivel de bienestar continuará pase lo que pase.
+            </p>
+            <ul class="stage-list">
+              <li><i class="fa-solid fa-check"></i> Fondos garantizados para la educación universitaria de tus hijos.</li>
+              <li><i class="fa-solid fa-check"></i> Cobertura médica de alta especialidad ante enfermedades o accidentes.</li>
+              <li><i class="fa-solid fa-check"></i> Respaldo financiero inmediato ante invalidez o eventualidad.</li>
+            </ul>
+          </div>
+          <div class="stage-box-visual">
+            <div class="visual-icon"><i class="fa-solid fa-shield-heart"></i></div>
+            <h4>Continuidad Familiar</h4>
+            <p>Tus hijos terminarán su carrera universitaria exactamente como lo planeaste, con certeza económica total.</p>
+          </div>
+        </div>
+
+        <div class="stage-content-card" id="tab-retiro">
+          <div class="stage-text">
+            <h3>Vivir tu retiro con total tranquilidad</h3>
+            <p>
+              Alcanzar la etapa madura con un plan personal blindado asegura que no dependas de pensiones limitadas para mantener tu ritmo de vida.
+            </p>
+            <ul class="stage-list">
+              <li><i class="fa-solid fa-check"></i> Ingresos vitalicios libres de retención fiscal conforme al Art. 93 LISR.</li>
+              <li><i class="fa-solid fa-check"></i> Cero volatilidad: tu capital respaldado en contratos garantizados.</li>
+              <li><i class="fa-solid fa-check"></i> Conservación del patrimonio familiar para las siguientes generaciones.</li>
+            </ul>
+          </div>
+          <div class="stage-box-visual">
+            <div class="visual-icon"><i class="fa-solid fa-umbrella-beach"></i></div>
+            <h4>Libertad Financiera</h4>
+            <p>Transforma años de esfuerzo en una renta mensual digna, puntual y completamente tuya.</p>
+          </div>
+        </div>
+
+        <div class="stage-content-card" id="tab-negocios">
+          <div class="stage-text">
+            <h3>Protección estratégica empresarial</h3>
+            <p>
+              Diseñamos esquemas para empresas que protegen socios fundadores, directivos clave e incentivan la retención de talento mientras reducen la carga tributaria corporativa.
+            </p>
+            <ul class="stage-list">
+              <li><i class="fa-solid fa-check"></i> Seguro de Hombre Clave 100% deducible de impuestos (Art. 27 LISR).</li>
+              <li><i class="fa-solid fa-check"></i> Planes de previsión social y retención para ejecutivos estratégicos.</li>
+              <li><i class="fa-solid fa-check"></i> Liquidez para acuerdos de compra-venta de acciones entre socios.</li>
+            </ul>
+          </div>
+          <div class="stage-box-visual">
+            <div class="visual-icon"><i class="fa-solid fa-briefcase"></i></div>
+            <h4>Blindaje Corporativo</h4>
+            <p>Evita que la ausencia imprevista de un socio o técnico clave paralice la operación de tu empresa.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="pilares">
+    <div class="container">
+      <div class="section-title-wrap reveal">
+        <div class="section-subtitle">Nuestros Pilares</div>
+        <h2 class="section-title">Estrategias Patrimoniales y Financieras</h2>
+        <p class="section-desc">
+          Soluciones integradas para proteger lo que tienes hoy y multiplicar lo que tendrás mañana.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card-luxury reveal delay-1">
+          <div class="card-icon">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <h3>Protege tu Patrimonio</h3>
+          <p>
+            Salud, vida y retiro tranquilo. Estructuramos un muro de contención contra eventos inesperados para que tus ahorros nunca se vean comprometidos por gastos médicos o siniestros imprevistos.
+          </p>
+        </div>
+
+        <div class="card-luxury reveal delay-2">
+          <div class="card-icon">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+          </div>
+          <h3>Optimiza tus Impuestos</h3>
+          <p>
+            Estrategias fiscales inteligentes. Aplicamos las herramientas legales que el marco tributario ofrece para deducir aportaciones, generar saldo a favor y acelerar la acumulación de tu dinero.
+          </p>
+        </div>
+
+        <div class="card-luxury reveal delay-3">
+          <div class="card-icon">
+            <i class="fa-solid fa-chart-line"></i>
+          </div>
+          <h3>Crea Estrategias Empresariales</h3>
+          <p>
+            Soluciones para tu negocio. Esquemas que resguardan la continuidad operativa de empresas y PyMEs, creando beneficios fiscales inmediatos y fidelidad en los equipos clave.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="vida">
+    <div class="container">
+      <div class="section-title-wrap reveal">
+        <div class="section-subtitle">Beneficios Tangibles</div>
+        <h2 class="section-title">Con un Seguro de Vida Puedes Lograr:</h2>
+        <p class="section-desc">
+          Más que una póliza tradicional, es un instrumento financiero vivo que trabaja activamente para tus metas.
+        </p>
+      </div>
+
+      <div class="grid-4">
+        <div class="feature-card reveal delay-1">
+          <i class="fa-solid fa-piggy-bank"></i>
+          <h4>¡Ahorrar para tu retiro!</h4>
+          <p>Garantiza estabilidad económica para cuando concluyas tu etapa laboral activa, manteniendo intacto tu nivel de vida.</p>
+        </div>
+
+        <div class="feature-card reveal delay-2">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <h4>Educación Garantizada</h4>
+          <p>Crea el fondo educativo universitario para tus hijos o nietos, con entrega puntual y rendimientos asegurados.</p>
+        </div>
+
+        <div class="feature-card reveal delay-3">
+          <i class="fa-solid fa-house-chimney"></i>
+          <h4>Capitalizar Proyectos</h4>
+          <p>Construye el capital necesario para comprar una vivienda, iniciar un negocio o expandir tu portafolio de inversión.</p>
+        </div>
+
+        <div class="feature-card reveal delay-4">
+          <i class="fa-solid fa-people-roof"></i>
+          <h4>Respaldo Familiar</h4>
+          <p>Otorga suma asegurada inmediata a tus seres queridos frente a cualquier eventualidad de invalidez o fallecimiento.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="respaldo">
+    <div class="container">
+      <div class="gnp-banner reveal">
+        <div class="gnp-banner-header">
+          <div class="gnp-logo-full">
+            <span class="tag-agente">Agente</span>
+            <div class="tag-gnp">
+              <div class="tag-gnp-main">
+                <svg width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="14" fill="#F57C00"/>
+                  <path d="M50 8 C43 8 38 13 38 20 L38 32 C42 30 46 29 50 29 C54 29 58 30 62 32 L62 20 C62 13 57 8 50 8 Z" fill="#F57C00"/>
+                  <path d="M50 92 C57 92 62 87 62 80 L62 68 C58 70 54 71 50 71 C46 71 42 70 38 68 L38 80 C38 87 43 92 50 92 Z" fill="#F57C00"/>
+                  <path d="M8 50 C8 57 13 62 20 62 L32 62 C30 58 29 54 29 50 C29 46 30 42 32 38 L20 38 C13 38 8 43 8 50 Z" fill="#F57C00"/>
+                  <path d="M92 50 C92 43 87 38 80 38 L68 38 C70 42 71 46 71 50 C71 54 70 58 68 62 L80 62 C87 62 92 57 92 50 Z" fill="#F57C00"/>
+                </svg>
+                GNP
+              </div>
+              <div class="tag-gnp-sub">SEGUROS</div>
+            </div>
+          </div>
+          <p class="gnp-intro">
+            Como Agente de <strong>GNP Seguros</strong>, tus soluciones cuentan con el respaldo directo de la aseguradora 100% mexicana líder en el país, con más de 120 años protegiendo vidas y patrimonios.
+          </p>
+        </div>
+
+        <div class="gnp-grid">
+          <div class="gnp-item">
+            <i class="fa-solid fa-hospital-user"></i>
+            <h4>Gastos Médicos Mayores</h4>
+            <p>Acceso a las instituciones hospitalarias más reconocidas del país, con especialistas de primer nivel y convenios directos de pago.</p>
+          </div>
+
+          <div class="gnp-item">
+            <i class="fa-solid fa-vault"></i>
+            <h4>Planes de Retiro y Ahorro</h4>
+            <p>Contratos institucionales garantizados con esquemas sólidos de inversión diseñados para cumplir todas tus metas financieras.</p>
+          </div>
+
+          <div class="gnp-item">
+            <i class="fa-solid fa-certificate"></i>
+            <h4>Certeza Jurídica</h4>
+            <p>Instrumentos auditados y registrados bajo los máximos estándares de la Comisión Nacional de Seguros y Fianzas (CNSF) y CONDUSEF.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="metodo">
+    <div class="container">
+      <div class="section-title-wrap reveal">
+        <div class="section-subtitle">Cómo Trabajamos</div>
+        <h2 class="section-title">Asesoría Profesional en 4 Pasos</h2>
+        <p class="section-desc">
+          Un proceso claro, transparente y sin tecnicismos para que tomes el control de tus finanzas.
+        </p>
+      </div>
+
+      <div class="process-timeline">
+        <div class="process-step reveal delay-1">
+          <div class="step-badge">1</div>
+          <h4>Diagnóstico</h4>
+          <p>Revisamos tus metas, dependientes, situación fiscal y capacidad de ahorro para definir prioridades reales.</p>
+        </div>
+
+        <div class="process-step reveal delay-2">
+          <div class="step-badge">2</div>
+          <h4>Estrategia a la Medida</h4>
+          <p>Comparamos los instrumentos ideales de ahorro, protección médica y deducción fiscal que se adapten a tu ritmo.</p>
+        </div>
+
+        <div class="process-step reveal delay-3">
+          <div class="step-badge">3</div>
+          <h4>Emisión y Blindaje</h4>
+          <p>Ponemos en marcha tu plan de forma transparente, con documentación oficial y certeza jurídica inmediata.</p>
+        </div>
+
+        <div class="process-step reveal delay-4">
+          <div class="step-badge">4</div>
+          <h4>Acompañamiento Continuo</h4>
+          <p>Tu agente siempre estará a una llamada de distancia para trámites, ajustes por etapas y apoyo ante cualquier siniestro.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="mision-vision">
+    <div class="container">
+      <div class="mission-vision-grid">
+        <div class="mv-box reveal delay-1">
+          <h3><i class="fa-solid fa-compass" style="color: var(--brand-orange);"></i> Misión</h3>
+          <p>
+            Brindar asesoría estratégica en seguros y protección financiera que permita a cada persona y familia tomar decisiones inteligentes para cuidar su salud, patrimonio y futuro, mediante soluciones claras, honestas y personalizadas que generen tranquilidad y confianza a largo plazo.
+          </p>
+        </div>
+
+        <div class="mv-box reveal delay-2">
+          <h3><i class="fa-solid fa-eye" style="color: var(--brand-orange);"></i> Visión</h3>
+          <p>
+            Ser un referente en asesoría patrimonial integral en México, reconocido por combinar tecnología, análisis estratégico y cercanía humana, ayudando a más familias y profesionistas a construir seguridad financiera, bienestar y estabilidad generacional.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contacto">
+    <div class="container">
+      <div class="contact-banner reveal">
+        <h2>Acércate a tu agente ABECK</h2>
+        <div class="agent-name">Abraham López Encinas</div>
+        
+        <div class="email-btn-wrapper">
+          <a href="mailto:abecklopez45@gmail.com?subject=Solicitud%20de%20Asesor%C3%ADa%20Financiera%20y%20Seguros%20-%20ABECK&body=Hola%20Abraham%2C%0A%0AMe%20gustar%C3%ADa%20recibir%20asesor%C3%ADa%20personalizada%20sobre%20estrategias%20de%20protecci%C3%B3n%2C%20retiro%20y%20seguros.%0A%0AMi%20nombre%3A%20%0AMi%20tel%C3%A9fono%3A%20%0AMe%20interesa%20enfocarme%20en%3A%20%0A%0ASaludos." class="email-action-btn">
+            <i class="fa-solid fa-envelope"></i> abecklopez45@gmail.com
+          </a>
+        </div>
+
+        <div class="contact-actions-row">
+          <a href="tel:6441292729" class="btn btn-call">Llamar</a>
+          <a href="https://wa.me/526441292729" target="_blank" class="btn btn-contact">Contacto</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="mobile-bar">
+    <a href="tel:6441292729" class="btn btn-call">Llamar</a>
+    <a href="https://wa.me/526441292729" target="_blank" class="btn btn-contact">Contacto</a>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; ABECK Asesoría Financiera y Seguros · Abraham López Encinas</p>
+      <p style="margin-top: 0.35rem; font-size: 0.88rem; color: var(--brand-blue-dark); font-weight: 700;">Agente GNP Seguros · Asesoría Profesional · Resultados Reales</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const reveals = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+            obs.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: "0px 0px -25px 0px"
+      });
+
+      reveals.forEach(el => observer.observe(el));
+
+      const tabButtons = document.querySelectorAll(".stage-tab-btn");
+      const tabContents = document.querySelectorAll(".stage-content-card");
+
+      tabButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const targetId = btn.getAttribute("data-tab");
+
+          tabButtons.forEach(b => b.classList.remove("active"));
+          tabContents.forEach(c => c.classList.remove("active"));
+
+          btn.classList.add("active");
+          const targetCard = document.getElementById(targetId);
+          if (targetCard) {
+            targetCard.classList.add("active");
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
