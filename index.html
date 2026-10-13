@@ -175,7 +175,6 @@
       width: 100%;
     }
 
-    /* Botón Hamburguesa */
     .menu-toggle {
       display: none;
       background: #ffffff;
@@ -220,7 +219,6 @@
       background-color: var(--brand-orange);
     }
 
-    /* Menú Móvil Lateral / Overlay */
     .mobile-menu-overlay {
       position: fixed;
       top: 0;
@@ -917,7 +915,6 @@
       line-height: 1.8;
     }
 
-    /* Sección de Contacto */
     .contact-banner {
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, #edf4fd 100%);
       border: 2px solid var(--brand-blue);
@@ -943,7 +940,6 @@
       margin-bottom: 1.6rem;
     }
     
-    /* Contenedor y Botón de Correo perfectamente centrado */
     .email-btn-wrapper {
       margin-bottom: 2.2rem;
       display: flex;
@@ -993,26 +989,6 @@
       flex-wrap: wrap;
     }
 
-    .mobile-bar {
-      position: fixed;
-      bottom: 1rem;
-      left: 1rem;
-      right: 1rem;
-      z-index: 999;
-      display: none;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      padding: 0.75rem;
-      border-radius: 50px;
-      border: 1px solid var(--border-subtle);
-      box-shadow: 0 12px 35px rgba(0, 40, 90, 0.18);
-      gap: 0.75rem;
-    }
-    .mobile-bar a {
-      flex: 1;
-    }
-
     footer {
       border-top: 1px solid var(--border-subtle);
       padding: 2.5rem 0;
@@ -1023,15 +999,11 @@
       margin-top: 3.5rem;
     }
 
-    /* Adaptabilidad Responsiva */
     @media (max-width: 860px) {
       .nav-links {
         display: none;
       }
       .menu-toggle {
-        display: flex;
-      }
-      .mobile-bar {
         display: flex;
       }
       .hero {
@@ -1040,9 +1012,6 @@
       }
       .section {
         padding: 3.8rem 0;
-      }
-      body {
-        padding-bottom: 5rem;
       }
       .logo-img-header {
         height: 38px;
@@ -1092,13 +1061,11 @@
   <div class="glow-orb glow-1"></div>
   <div class="glow-orb glow-2"></div>
 
-  <!-- Header con Botón Hamburguesa -->
   <header>
     <a href="#" class="brand-link" aria-label="ABECK Inicio">
       <img src="logo.png" alt="ABECK Asesoría Financiera y Seguros" class="logo-img-header" />
     </a>
     
-    <!-- Navegación de Escritorio -->
     <nav class="nav-links">
       <a href="#etapas">Diagnóstico</a>
       <a href="#pilares">Estrategias</a>
@@ -1109,7 +1076,6 @@
       <a href="#contacto">Contacto</a>
     </nav>
 
-    <!-- Botón Hamburguesa para Móviles -->
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú de navegación" onclick="toggleMobileNav()">
       <span></span>
       <span></span>
@@ -1117,7 +1083,6 @@
     </button>
   </header>
 
-  <!-- Overlay y Panel de Navegación Móvil -->
   <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileNav()"></div>
   <div class="mobile-menu-panel" id="mobileMenuPanel">
     <nav class="mobile-nav-links">
@@ -1486,7 +1451,6 @@
         <h2>Acércate a tu agente ABECK</h2>
         <div class="agent-name">Abraham López Encinas</div>
         
-        <!-- Enlace de correo perfectamente centrado -->
         <div class="email-btn-wrapper">
           <a href="mailto:abecklopez45@gmail.com?subject=Solicitud%20de%20Asesor%C3%ADa%20Financiera%20y%20Seguros%20-%20ABECK&body=Hola%20Abraham%2C%0A%0AMe%20gustar%C3%ADa%20recibir%20asesor%C3%ADa%20personalizada%20sobre%20estrategias%20de%20protecci%C3%B3n%2C%20retiro%20y%20seguros.%0A%0AMi%20nombre%3A%20%0AMi%20tel%C3%A9fono%3A%20%0AMe%20interesa%20enfocarme%20en%3A%20%0A%0ASaludos." class="email-action-btn">
             <i class="fa-solid fa-envelope"></i>
@@ -1502,11 +1466,6 @@
     </div>
   </section>
 
-  <div class="mobile-bar">
-    <a href="tel:6441292729" class="btn btn-call">Llamar</a>
-    <a href="https://wa.me/526441292729" target="_blank" class="btn btn-contact">Contacto</a>
-  </div>
-
   <footer>
     <div class="container">
       <p>&copy; ABECK Asesoría Financiera y Seguros · Abraham López Encinas</p>
@@ -1514,9 +1473,7 @@
     </div>
   </footer>
 
-  <!-- Script global con funciones directas disponibles antes de la carga de recursos -->
   <script>
-    // Control del Menú Móvil disponible global e instantáneamente
     function toggleMobileNav() {
       const btn = document.getElementById("menuToggle");
       const overlay = document.getElementById("mobileMenuOverlay");
@@ -1543,9 +1500,7 @@
       document.body.classList.remove("menu-open");
     }
 
-    // Inicializaciones al cargar DOM
     document.addEventListener("DOMContentLoaded", () => {
-      // Animaciones al hacer scroll (solo la primera vez)
       const reveals = document.querySelectorAll(".reveal");
       if ("IntersectionObserver" in window) {
         const observer = new IntersectionObserver((entries, obs) => {
@@ -1565,7 +1520,6 @@
         reveals.forEach(el => el.classList.add("active"));
       }
 
-      // Tabs del Diagnóstico por Etapas
       const tabButtons = document.querySelectorAll(".stage-tab-btn");
       const tabContents = document.querySelectorAll(".stage-content-card");
 
